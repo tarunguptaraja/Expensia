@@ -1,4 +1,6 @@
 package com.tarunguptaraja.expensia.ui.home.viewmodel
 
-class HomeViewModel {
+import com.tarunguptaraja.expensia.base.BaseViewModel
+
+class HomeViewModel: BaseViewModel() {
 }
