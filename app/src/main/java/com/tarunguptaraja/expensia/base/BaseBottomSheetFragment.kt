@@ -2,11 +2,15 @@ package com.tarunguptaraja.expensia.base
 
 import android.content.Context
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import com.tarunguptaraja.expensia.Expensia
+import org.kodein.di.KodeinAware
+import org.kodein.di.android.kodein
+import kotlin.getValue
 
-abstract class BaseBottomSheetFragment : BottomSheetDialogFragment(), ContainerFragmentUtils {
+abstract class BaseBottomSheetFragment : BottomSheetDialogFragment(), ContainerFragmentUtils, KodeinAware {
 
     override var parentContainerFragment: ContainerFragment? = null
-//    val profileViewModel: ProfileViewModel by store()
+    override val kodein by kodein(Expensia.appContext!!)
 
     override fun onAttach(context: Context) {
         super.onAttach(context)

@@ -52,6 +52,12 @@ dependencies {
     androidTestImplementation(libs.androidx.espresso.core)
 
     implementation (libs.vita)
+    implementation (libs.intuit.sdp.android)
+    implementation (libs.pinview)
+    implementation (libs.circleimageview)
+    implementation (libs.lottie)
+    implementation (libs.kodein.di.generic.jvm)
+    implementation (libs.kodein.di.framework.android.x)
 
     implementation (libs.gson)
     implementation (libs.retrofit)
