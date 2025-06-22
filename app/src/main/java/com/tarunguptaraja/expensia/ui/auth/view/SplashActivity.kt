@@ -1,5 +1,6 @@
 package com.tarunguptaraja.expensia.ui.auth.view
 
+import android.content.Intent
 import android.os.Bundle
 import com.tarunguptaraja.expensia.base.BaseActivity
 import com.tarunguptaraja.expensia.databinding.ActivitySplashBinding
@@ -12,5 +13,6 @@ class SplashActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivitySplashBinding.inflate(layoutInflater, null, false)
         setContentView(binding.root)
+        startActivity(Intent(this, AuthenticationActivity::class.java))
     }
 }

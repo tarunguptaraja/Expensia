@@ -1,4 +1,6 @@
 package com.tarunguptaraja.expensia.ui.auth.viewmodel
 
-class SplashViewModel {
+import com.tarunguptaraja.expensia.base.BaseViewModel
+
+class SplashViewModel : BaseViewModel() {
 }
