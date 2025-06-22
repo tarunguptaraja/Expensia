@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">Expensia</string>
+    <string name="server_error">Looks like we\'re having\nsome server issues\n\nPlease check back soon</string>
+    <string name="check_your_mobile_data_or_wifi_connection">Check your mobile data or WIFI connection</string>
 </resources>

@@ -8,6 +8,8 @@ import android.content.SharedPreferences
 import androidx.lifecycle.LifecycleObserver
 import androidx.lifecycle.ProcessLifecycleOwner
 import com.androidisland.vita.startVita
+import com.tarunguptaraja.expensia.retrofit.ApiInterfacePlatform
+import com.tarunguptaraja.expensia.retrofit.WebServicesPlatform
 import org.kodein.di.Kodein
 import org.kodein.di.KodeinAware
 import org.kodein.di.generic.bind
@@ -36,6 +38,7 @@ class Expensia : Application(), LifecycleObserver, KodeinAware {
     }
 
     override val kodein: Kodein = Kodein.lazy {
+        bind() from singleton { WebServicesPlatform.retrofit.create(ApiInterfacePlatform::class.java) }
         bind() from singleton {
             this@Expensia.applicationContext!!.getSharedPreferences(
                 "expensia", MODE_PRIVATE
