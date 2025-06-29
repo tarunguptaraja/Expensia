@@ -11,9 +11,9 @@
 
     <color name="light_100">#FFFFFF</color>
     <color name="light_80">#FBFBFB</color>
-    <color name="light_60">#F7F9FA</color>
+    <color name="light_60">#F1F1FA</color>
     <color name="light_40">#F2F4F5</color>
-    <color name="light_20">#E5E5E5</color>
+    <color name="light_20">#91919F</color>
 
     <color name="violet_100">#7F3DFF</color>
     <color name="violet_80">#8F57FF</color>
