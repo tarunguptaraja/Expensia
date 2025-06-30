@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@color/light_100"
+    tools:context=".ui.auth.view.AuthenticationActivity">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar" />
+
+    <LinearLayout
+        android:id="@+id/ll_form"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_40sdp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <EditText
+            style="@style/TextView.Regular2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:background="@drawable/light_stroke_12"
+            android:hint="Name"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:textColor="@color/dark_100"
+            android:textColorHint="@color/light_20" />
+
+        <EditText
+            style="@style/TextView.Regular2"
+            android:layout_width="match_parent"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_18sdp"
+            android:background="@drawable/light_stroke_12"
+            android:hint="Email"
+            android:paddingHorizontal="@dimen/_12sdp"
+            android:textColor="@color/dark_100"
+            android:textColorHint="@color/light_20" />
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_18sdp">
+
+            <EditText
+                style="@style/TextView.Regular2"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@drawable/light_stroke_12"
+                android:hint="Password"
+                android:paddingHorizontal="@dimen/_12sdp"
+                android:textColor="@color/dark_100"
+                android:textColorHint="@color/light_20" />
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="@dimen/_9sdp"
+                android:layout_alignParentEnd="true"
+                android:layout_centerVertical="true"
+                android:src="@drawable/show" />
+        </RelativeLayout>
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/linearLayout2"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_12sdp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/ll_form">
+
+        <com.google.android.material.checkbox.MaterialCheckBox
+            style="@style/TextView.Regular3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="By signing up, you agree to the Terms of Service and Privacy Policy"
+            app:buttonIconTint="@color/light_100"
+            app:buttonTint="@color/violet_100" />
+    </LinearLayout>
+
+    <Button
+        android:id="@+id/btn_sign_up"
+        style="@style/Button"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="@dimen/_12sdp"
+        android:layout_marginTop="@dimen/_19sdp"
+        android:text="Sign Up"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout2" />
+</androidx.constraintlayout.widget.ConstraintLayout>

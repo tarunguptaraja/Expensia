@@ -6,4 +6,19 @@
     </style>
 
     <style name="Theme.Expensia" parent="Base.Theme.Expensia" />
+
+    <style name="Theme.Transparent" parent="Theme.AppCompat">
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <item name="android:windowContentOverlay">@null</item>
+        <item name="android:windowNoTitle">true</item>
+        <!--        <item name="android:windowIsFloating">true</item>-->
+        <item name="android:backgroundDimEnabled">true</item>
+        <item name="android:windowMinWidthMajor">98%</item>
+        <item name="android:windowMinWidthMinor">98%</item>
+    </style>
+    <style name="BottomSheetAnim" parent="Animation.AppCompat.Dialog">
+        <item name="android:windowEnterAnimation">@anim/speed_slide_up</item>
+        <item name="android:windowExitAnimation">@anim/slide_down</item>
+    </style>
 </resources>
