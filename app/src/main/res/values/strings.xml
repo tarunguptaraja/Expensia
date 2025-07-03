@@ -2,4 +2,23 @@
     <string name="app_name">Expensia</string>
     <string name="server_error">Looks like we\'re having\nsome server issues\n\nPlease check back soon</string>
     <string name="check_your_mobile_data_or_wifi_connection">Check your mobile data or WIFI connection</string>
+    <string name="login">Login</string>
+    <string name="login_ul"><u>Login</u></string>
+    <string name="sign_up_ul"><u>Sign Up</u></string>
+    <string name="don_t_have_an_account_yet">Don’t have an account yet?</string>
+    <string name="forgot_password">Forgot Password?</string>
+    <string name="password">Password</string>
+    <string name="name">Name</string>
+    <string name="by_signing_up_you_agree_to_the_terms_of_service_and_privacy_policy">By signing up, you agree to the Terms of Service and Privacy Policy</string>
+    <string name="sign_up">Sign Up</string>
+    <string name="email">Email</string>
+    <string name="or_with">Or with</string>
+    <string name="sign_up_with_google">Sign Up with Google</string>
+    <string name="already_have_an_account">Already have an account?</string>
+    <string name="don_t_worry_nenter_your_email_and_we_ll_send_you_a_link_to_reset_your_password">Don’t worry.\nEnter your email and we’ll send you a link to reset your password.</string>
+    <string name="continue_txt">Continue</string>
+    <string name="your_email_is_on_the_way">Your email is on the way</string>
+    <string name="back_to_login">Back to Login</string>
+    <string name="retype_new_password">Retype New Password</string>
+    <string name="new_password">New Password</string>
 </resources>
