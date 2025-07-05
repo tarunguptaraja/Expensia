@@ -2,7 +2,6 @@ package com.tarunguptaraja.expensia.ui.auth.view
 
 import android.os.Bundle
 import android.util.Log
-import androidx.activity.enableEdgeToEdge
 import com.tarunguptaraja.expensia.base.BaseActivity
 import com.tarunguptaraja.expensia.databinding.ActivityAuthenticationBinding
 import com.tarunguptaraja.expensia.extensions.onOneClick
@@ -19,12 +18,10 @@ class AuthenticationActivity : BaseActivity() {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthenticationBinding.inflate(layoutInflater, null, false)
         setContentView(binding.root)
-        enableEdgeToEdge()
-        supportActionBar?.hide()
-        binding.btnSignUp.onOneClick (1000){  }
-
-        viewModel.requestOtp { response ->
-            Log.d("REQUEST OTP", response.toJson())
+        binding.btnSignUp.onOneClick {
+            viewModel.requestOtp { response ->
+                Log.d("REQUEST OTP", response.toJson())
+            }
         }
     }
 }
