@@ -1,38 +1,38 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
-    android:orientation="vertical"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    app:flow_horizontalAlign="center"
-    android:layout_height="match_parent">
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    app:flow_horizontalAlign="center">
+
     <ImageView
         android:id="@+id/titleImage"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="10dp"
-        android:src="@drawable/onboarding_illust1"/>
+        android:src="@drawable/onboarding_illust1" />
 
     <TextView
-        android:id="@+id/texttitle"
+        android:id="@+id/tv_title"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
         android:fontFamily="@font/inter_bold"
-        android:text="@string/heading_one"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="28dp"/>
+        android:textSize="@dimen/_22sdp"
+        tools:text="Gain total control of your money" />
 
     <TextView
-        android:id="@+id/textdeccription"
+        android:id="@+id/tv_description"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="30dp"
         android:fontFamily="@font/inter_medium"
-        android:text="@string/desc_one"
         android:textAlignment="center"
         android:textColor="@color/black"
-        android:textSize="16dp"/>
-
-
+        android:textSize="@dimen/_12sdp"
+        tools:text="Become your own money manager and make every cent count" />
 </LinearLayout>

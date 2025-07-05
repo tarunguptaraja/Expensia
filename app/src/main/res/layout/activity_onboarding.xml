@@ -7,51 +7,6 @@
     android:layout_height="match_parent"
     tools:context=".ui.auth.view.OnboardingActivity">
 
-    <Button
-        android:id="@+id/skipButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:background="#00000000"
-        android:text="Skip"
-        android:textColor="@color/violet_80"
-        android:textSize="20sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/ellipse1"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:src="@drawable/illustrations"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--    <ImageView-->
-    <!--        android:id="@+id/ellipse2"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:src="@drawable/ellipse2"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="parent" />-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/backbtn"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="#00000000"-->
-    <!--        android:text="Back"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintStart_toStartOf="parent" />-->
-
-    <!--    <Button-->
-    <!--        android:id="@+id/nextbtn"-->
-    <!--        android:layout_width="wrap_content"-->
-    <!--        android:layout_height="wrap_content"-->
-    <!--        android:background="#00000000"-->
-    <!--        android:text="Next"-->
-    <!--        app:layout_constraintBottom_toBottomOf="parent"-->
-    <!--        app:layout_constraintEnd_toEndOf="@+id/ellipse2" />-->
-
     <androidx.viewpager2.widget.ViewPager2
         android:id="@+id/slideViewPager"
         android:layout_width="match_parent"
@@ -60,7 +15,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/skipButton"
+        app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.0" />
 
     <LinearLayout
@@ -71,7 +26,6 @@
         android:layout_marginBottom="44dp"
         android:gravity="center"
         android:orientation="horizontal"
-
         app:layout_constraintBottom_toTopOf="@+id/linearLayout3"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.461"
@@ -87,7 +41,6 @@
             <ImageView
                 android:id="@+id/iv1"
                 android:layout_width="match_parent"
-
                 android:layout_height="match_parent" />
         </androidx.cardview.widget.CardView>
 
@@ -128,8 +81,6 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="@+id/slideViewPager">
-
-
     </LinearLayout>
 
     <LinearLayout
@@ -146,7 +97,6 @@
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-
             android:text="SignUp"
             app:layout_constraintBottom_toTopOf="@+id/indicator_layout"
             app:layout_constraintEnd_toEndOf="parent"
@@ -155,7 +105,7 @@
 
         <Button
             android:id="@+id/btn_login"
-            style="@style/Button"
+            style="@style/Button.Light"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="Login"
@@ -164,7 +114,6 @@
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/btn_sign_up" />
-
     </LinearLayout>
 
     <Button
@@ -172,7 +121,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="#00000000"
-
         android:text="Next"
         android:textColor="@color/violet_80"
         android:textSize="20sp"
@@ -189,6 +137,4 @@
         android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
-
-
 </androidx.constraintlayout.widget.ConstraintLayout>
