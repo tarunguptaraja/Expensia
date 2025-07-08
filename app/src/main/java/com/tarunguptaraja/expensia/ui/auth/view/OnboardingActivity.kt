@@ -1,98 +1,176 @@
 package com.tarunguptaraja.expensia.ui.auth.view
 
+import android.content.Intent
+import android.content.res.Resources
 import android.os.Bundle
+import android.os.Handler
+import android.os.Looper
+import android.view.View
 import android.widget.ImageView
+import android.widget.LinearLayout
 import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
+import androidx.core.content.ContentProviderCompat.requireContext
+import androidx.core.content.ContextCompat
 import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.viewpager2.widget.ViewPager2
+import com.tarunguptaraja.expensia.Expensia
 import com.tarunguptaraja.expensia.R
+import com.tarunguptaraja.expensia.databinding.ActivityMainBinding
+import com.tarunguptaraja.expensia.databinding.ActivityOnboardingBinding
+import androidx.core.content.edit
 
 class OnboardingActivity : AppCompatActivity() {
-    lateinit var iv1: ImageView
-    lateinit var iv2: ImageView
-    lateinit var iv3: ImageView
-    lateinit var onboardingViewpager: ViewPager2
+ lateinit var binding: ActivityOnboardingBinding
+    private var currentPage = 0
+    private var isScrollingForward = true
+    private val scrollInterval: Long = 5000 // 3 seconds
+    private val autoScrollHandler = Handler(Looper.getMainLooper())
+    private lateinit var autoScrollRunnable: Runnable
     lateinit var onboardingViewpagerAdapter: OnboardingViewpagerAdapter
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater)
         enableEdgeToEdge()
-        setContentView(R.layout.activity_onboarding)
+        setContentView(binding.root) // ✅ Use binding.root
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main)) { v, insets ->
             val systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars())
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom)
             insets
         }
-        iv1 = findViewById(R.id.iv1)
-        iv2 = findViewById(R.id.iv2)
-        iv3 = findViewById(R.id.iv3)
-        onboardingViewpager = findViewById(R.id.slideViewPager)
+        binding.btnSignUp.setOnClickListener {
+            startActivity(Intent(this,AuthenticationActivity::class.java))
+            finish()
+        }
+        binding.btnLogin.setOnClickListener {
+
+        }
+        Expensia.sharedPreferences.edit() {
+            putBoolean("onboarding_seen", true)
+        }
         setupViewPagerAdapter()
-        onboardingViewpager.registerOnPageChangeCallback(object :
+        val totalPages = binding.slideViewPager.adapter?.itemCount ?: 0
+        setupDots(totalPages)
+        binding.slideViewPager.registerOnPageChangeCallback(object :
             ViewPager2.OnPageChangeCallback() {
             override fun onPageScrolled(
                 position: Int,
                 positionOffset: Float,
                 positionOffsetPixels: Int
             ) {
-                changeColor()
                 super.onPageScrolled(position, positionOffset, positionOffsetPixels)
-
             }
-
             override fun onPageSelected(position: Int) {
                 super.onPageSelected(position)
+                currentPage = position // Sync current page index
+                updateDots(position)
             }
-
             override fun onPageScrollStateChanged(state: Int) {
-                changeColor()
                 super.onPageScrollStateChanged(state)
-
             }
-
         })
 
 
     }
 
     fun setupViewPagerAdapter() {
-        val imageList =
-            listOf(R.drawable.onboarding_illust1, R.drawable.onboarding_illust2, R.drawable.onboarding_illust3)
-        val titleList = listOf("Gain total control \n" + "of your money","Know where your \n " + "money goes","Planning ahead")
-        val discriptionList = listOf( "Become your own money manager \n" +
-                " and make every cent count","Track your transaction easily, \n" +
-                "  with categories and financial report", "Setup your budget for each category \n" +
-                "  so you in control")
-        onboardingViewpagerAdapter = OnboardingViewpagerAdapter(imageList, this,titleList,discriptionList)
-        onboardingViewpager.adapter = onboardingViewpagerAdapter
+        val onboardingList = listOf(
+            OnboardingModel(
+                image = R.drawable.onboarding_illust1,
+                title = "Gain total control \nof your money",
+                description = "Become your own money manager \nand make every cent count"
+            ),
+            OnboardingModel(
+                image = R.drawable.onboarding_illust2,
+                title = "Know where your \nmoney goes",
+                description = "Track your transaction easily, \nwith categories and financial report"
+            ),
+            OnboardingModel(
+                image = R.drawable.onboarding_illust3,
+                title = "Planning ahead",
+                description = "Setup your budget for each category \nso you are in control"
+            )
+        )
+        onboardingViewpagerAdapter = OnboardingViewpagerAdapter(onboardingList, this)
+       binding.slideViewPager.adapter = onboardingViewpagerAdapter
+    }
+    private val dots = mutableListOf<View>()
+    private fun setupDots(count: Int) {
+        binding.dotsContainer.removeAllViews()
+        dots.clear()
+
+        for (i in 0 until count) {
+            val dot = View(this).apply {
+                val size = if (i == 0) 16 else 8 // First one bigger
+                layoutParams = LinearLayout.LayoutParams(size.dp, size.dp).apply {
+                    setMargins(6.dp, 0, 6.dp, 0)
+                }
+                background = ContextCompat.getDrawable(this@OnboardingActivity, if (i == 0) R.drawable.dot_active else R.drawable.dot_inactive)
+            }
+            binding.dotsContainer.addView(dot)
+            dots.add(dot)
+        }
     }
 
-    fun changeColor() {
-        when (onboardingViewpager.currentItem) {
-            0 -> {
-                iv1.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_100))
-                iv2.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_40))
-                iv3.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_40))
+    private fun updateDots(selectedPosition: Int) {
+        for (i in dots.indices) {
+            val isSelected = i == selectedPosition
+            val size = if (isSelected) 16 else 8
 
+            dots[i].layoutParams = LinearLayout.LayoutParams(size.dp, size.dp).apply {
+                setMargins(6.dp, 0, 6.dp, 0)
             }
 
-            1 -> { iv1.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_40))
-                iv2.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_100))
-                iv3.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_40))
+            dots[i].background = ContextCompat.getDrawable(
+                this@OnboardingActivity,
+                if (isSelected) R.drawable.dot_active else R.drawable.dot_inactive
+            )
+            dots[i].requestLayout()
+        }
+    }
 
+    val Int.dp: Int get() = (this * Resources.getSystem().displayMetrics.density).toInt()
 
-            }
+    private fun startAutoScroll() {
+        autoScrollRunnable = object : Runnable {
+            override fun run() {
+                val itemCount = binding.slideViewPager.adapter?.itemCount ?: 0
+                if (itemCount == 0) return
 
+                // Update scroll direction
+                if (isScrollingForward) {
+                    if (currentPage < itemCount - 1) {
+                        currentPage++
+                    } else {
+                        isScrollingForward = false
+                        currentPage--
+                    }
+                } else {
+                    if (currentPage > 0) {
+                        currentPage--
+                    } else {
+                        isScrollingForward = true
+                        currentPage++
+                    }
+                }
 
-            2 -> { iv1.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_40))
-                iv2.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_40))
-                iv3.setBackgroundColor(applicationContext.resources.getColor(R.color.violet_100))
+                binding.slideViewPager.setCurrentItem(currentPage, true)
 
-
+                autoScrollHandler.postDelayed(this, scrollInterval)
             }
         }
 
+        autoScrollHandler.postDelayed(autoScrollRunnable, scrollInterval)
+    }
+    override fun onResume() {
+        super.onResume()
+        startAutoScroll()
+    }
+
+    override fun onPause() {
+        super.onPause()
+        autoScrollHandler.removeCallbacks(autoScrollRunnable)
     }
 
 

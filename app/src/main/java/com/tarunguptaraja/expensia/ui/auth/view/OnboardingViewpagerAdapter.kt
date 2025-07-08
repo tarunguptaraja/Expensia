@@ -9,16 +9,16 @@ import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.tarunguptaraja.expensia.R
 
-class OnboardingViewpagerAdapter(private val imageList: List<Int>, val context: Context, private val titlelist:List<String>, private val discriptionList:List<String>):RecyclerView.Adapter<OnboardingViewpagerAdapter.ViewPagerViewHolder>() {
+class OnboardingViewpagerAdapter(private val onboardingList: List<OnboardingModel>, val context: Context):RecyclerView.Adapter<OnboardingViewpagerAdapter.ViewPagerViewHolder>() {
     class ViewPagerViewHolder(itemView: View):RecyclerView.ViewHolder(itemView){
         val imageView = itemView.findViewById<ImageView>(R.id.titleImage)
         val title = itemView.findViewById<TextView>(R.id.texttitle)
         val description = itemView.findViewById<TextView>(R.id.textdeccription)
 
-        fun bindData(image:Int,text1:String,text2: String){
-            imageView.setImageResource(image)
-            title.text= text1
-            description.text = text2
+        fun bindData(item:OnboardingModel){
+            imageView.setImageResource(item.image)
+            title.text= item.title
+            description.text = item.description
 
         }
     }
@@ -30,13 +30,11 @@ class OnboardingViewpagerAdapter(private val imageList: List<Int>, val context: 
     }
 
     override fun onBindViewHolder(holder: ViewPagerViewHolder, position: Int) {
-      val item = imageList[position]
-        val item2 = titlelist[position]
-        val item3 = discriptionList[position]
-        holder.bindData(item,item2,item3)
+      val item = onboardingList[position]
+        holder.bindData(item)
     }
 
     override fun getItemCount(): Int {
-        return imageList.size
+        return onboardingList.size
     }
 }
