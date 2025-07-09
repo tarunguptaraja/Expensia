@@ -1,6 +1,5 @@
 package com.tarunguptaraja.expensia.ui.auth.view
 
-import android.annotation.SuppressLint
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
@@ -32,9 +31,6 @@ class SplashActivity : BaseActivity() {
             }
             finish()
         }, 1500)
-
-
-
     }
 
     override fun onDestroy() {
