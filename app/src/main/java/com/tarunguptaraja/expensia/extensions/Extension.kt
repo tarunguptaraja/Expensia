@@ -1,10 +1,15 @@
 package com.tarunguptaraja.expensia.extensions
 
 import android.app.Activity
+import android.content.Context
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
+import android.text.SpannableStringBuilder
+import android.text.Spanned
+import android.text.style.ForegroundColorSpan
 import android.view.View
+import android.view.inputmethod.InputMethodManager
 import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
@@ -107,6 +112,30 @@ fun View.onOneClick(time: Long = 1000, callback: () -> Unit) {
             callback()
         }
     })
+}
+
+fun Activity.hideKeyboard() {
+    val view = currentFocus ?: View(this)
+    val imm = getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
+    imm.hideSoftInputFromWindow(view.windowToken, 0)
+}
+
+fun buildColoredText(parts: List<String>, colors: List<Int>): SpannableStringBuilder {
+    val builder = SpannableStringBuilder()
+
+    for (i in parts.indices) {
+        val part = parts[i]
+        val color = colors.getOrNull(i) ?: continue
+
+        val start = builder.length
+        builder.append(part)
+        val end = builder.length
+
+        builder.setSpan(
+            ForegroundColorSpan(color), start, end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE
+        )
+    }
+    return builder
 }
 
 fun Activity.logoutAndRemoveData() {
