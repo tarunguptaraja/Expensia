@@ -100,4 +100,6 @@ dependencies {
     implementation(libs.converter.simplexml)
     implementation(libs.okhttp)
     implementation(libs.logging.interceptor)
+
+    implementation(libs.mpandroidchart)
 }
