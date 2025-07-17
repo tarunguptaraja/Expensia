@@ -13,6 +13,7 @@ open class BaseModel {
 
     @SerializedName("description_translations")
     val descriptionTranslations: JsonElement? = null
+    @SerializedName("message")
     val description: String = ""
         get() {
             return try {

@@ -6,6 +6,7 @@ import android.os.Handler
 import android.os.Looper
 import com.tarunguptaraja.expensia.Expensia
 import com.tarunguptaraja.expensia.MainActivity
+import androidx.activity.enableEdgeToEdge
 import com.tarunguptaraja.expensia.base.BaseActivity
 import com.tarunguptaraja.expensia.databinding.ActivitySplashBinding
 
