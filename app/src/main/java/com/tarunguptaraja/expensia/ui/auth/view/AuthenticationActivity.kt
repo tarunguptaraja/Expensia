@@ -26,18 +26,22 @@ class AuthenticationActivity : BaseActivity() {
 
     private lateinit var binding: ActivityAuthenticationBinding
     private val viewModel: LogInViewModel by store()
-    private val pageState = MutableLiveData(AuthState.SIGNUP)
+    private val pageState = MutableLiveData<AuthState>()
     private lateinit var name: String
     private lateinit var email: String
     private lateinit var password: String
     private var isPasswordVisible = false
     private var timer: CountDownTimer? = null
+    private val isLogIn by lazy { intent.getBooleanExtra(Constants.IS_LOGIN, false) }
+    private var isBackNavigation = false
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityAuthenticationBinding.inflate(layoutInflater, null, false)
         setContentView(binding.root)
 
+        if (isLogIn) pageState.postValue(AuthState.LOGIN)
+        else pageState.postValue(AuthState.SIGNUP)
         binding.toolbar.ivBack.onOneClick {
             finish()
         }
@@ -46,31 +50,36 @@ class AuthenticationActivity : BaseActivity() {
             isPasswordVisible = false
             when (it) {
                 AuthState.SIGNUP -> {
+                    animateInFromRight(binding.clSignUp, binding.clLogIn)
                     binding.clSignUp.visibility = View.VISIBLE
-                    binding.clLogIn.visibility = View.GONE
-                    binding.clForgetPassword.visibility = View.GONE
-                    binding.clEmailSentAway.visibility = View.GONE
-                    binding.clResetPassword.visibility = View.GONE
-                    binding.clVerifyOtp.visibility = View.GONE
+                    binding.clLogIn.visibility = View.INVISIBLE
+                    binding.clForgetPassword.visibility = View.INVISIBLE
+                    binding.clEmailSentAway.visibility = View.INVISIBLE
+                    binding.clResetPassword.visibility = View.INVISIBLE
+                    binding.clVerifyOtp.visibility = View.INVISIBLE
                     binding.toolbar.tvTitle.text = getString(R.string.sign_up)
                 }
 
                 AuthState.LOGIN -> {
-                    binding.clSignUp.visibility = View.GONE
+                    if (isBackNavigation) animateInFromLeft(binding.clLogIn, binding.clSignUp)
+                    else animateInFromRight(binding.clLogIn, binding.clSignUp)
+
+                    binding.clSignUp.visibility = View.INVISIBLE
                     binding.clLogIn.visibility = View.VISIBLE
-                    binding.clForgetPassword.visibility = View.GONE
-                    binding.clEmailSentAway.visibility = View.GONE
-                    binding.clResetPassword.visibility = View.GONE
-                    binding.clVerifyOtp.visibility = View.GONE
+                    binding.clForgetPassword.visibility = View.INVISIBLE
+                    binding.clEmailSentAway.visibility = View.INVISIBLE
+                    binding.clResetPassword.visibility = View.INVISIBLE
+                    binding.clVerifyOtp.visibility = View.INVISIBLE
                     binding.toolbar.tvTitle.text = getString(R.string.login)
                 }
 
                 AuthState.VERIFY_OTP -> {
-                    binding.clSignUp.visibility = View.GONE
-                    binding.clLogIn.visibility = View.GONE
-                    binding.clForgetPassword.visibility = View.GONE
-                    binding.clEmailSentAway.visibility = View.GONE
-                    binding.clResetPassword.visibility = View.GONE
+                    animateInFromRight(binding.clVerifyOtp, binding.clLogIn)
+                    binding.clSignUp.visibility = View.INVISIBLE
+                    binding.clLogIn.visibility = View.INVISIBLE
+                    binding.clForgetPassword.visibility = View.INVISIBLE
+                    binding.clEmailSentAway.visibility = View.INVISIBLE
+                    binding.clResetPassword.visibility = View.INVISIBLE
                     binding.clVerifyOtp.visibility = View.VISIBLE
                     binding.toolbar.tvTitle.text = getString(R.string.verification)
                     startCountDownTimer()
@@ -88,25 +97,28 @@ class AuthenticationActivity : BaseActivity() {
                 }
 
                 AuthState.FORGOT_PASSWORD -> {
-                    binding.clSignUp.visibility = View.GONE
-                    binding.clLogIn.visibility = View.GONE
+                    animateInFromRight(binding.clForgetPassword, binding.clLogIn)
+                    binding.clSignUp.visibility = View.INVISIBLE
+                    binding.clLogIn.visibility = View.INVISIBLE
                     binding.clForgetPassword.visibility = View.VISIBLE
-                    binding.clEmailSentAway.visibility = View.GONE
-                    binding.clResetPassword.visibility = View.GONE
-                    binding.clVerifyOtp.visibility = View.GONE
+                    binding.clEmailSentAway.visibility = View.INVISIBLE
+                    binding.clResetPassword.visibility = View.INVISIBLE
+                    binding.clVerifyOtp.visibility = View.INVISIBLE
                     binding.toolbar.tvTitle.text = getString(R.string.forgot_password)
                 }
 
                 AuthState.RESET_PASSWORD -> {
-                    binding.clSignUp.visibility = View.GONE
-                    binding.clLogIn.visibility = View.GONE
-                    binding.clForgetPassword.visibility = View.GONE
-                    binding.clEmailSentAway.visibility = View.GONE
+                    animateInFromRight(binding.clResetPassword, binding.clForgetPassword)
+                    binding.clSignUp.visibility = View.INVISIBLE
+                    binding.clLogIn.visibility = View.INVISIBLE
+                    binding.clForgetPassword.visibility = View.INVISIBLE
+                    binding.clEmailSentAway.visibility = View.INVISIBLE
                     binding.clResetPassword.visibility = View.VISIBLE
-                    binding.clVerifyOtp.visibility = View.GONE
+                    binding.clVerifyOtp.visibility = View.INVISIBLE
                     binding.toolbar.tvTitle.text = getString(R.string.reset_password)
                 }
             }
+            isBackNavigation = false
         }
 
         binding.btnSignUp.onOneClick {
@@ -170,10 +182,11 @@ class AuthenticationActivity : BaseActivity() {
             email = binding.forgetEmail.text.toString()
             viewModel.forgotPassword(email) { response ->
                 if (response.success) {
+                    animateInFromRight(binding.clEmailSentAway, binding.clForgetPassword)
                     binding.tvEmailSentDescription.text =
                         "Check your email $email and follow the instructions to reset your password"
                     binding.clEmailSentAway.visibility = View.VISIBLE
-                    binding.clForgetPassword.visibility = View.GONE
+                    binding.clForgetPassword.visibility = View.INVISIBLE
                 } else {
                     Toast.makeText(this, response.description, Toast.LENGTH_LONG).show()
                 }
@@ -181,6 +194,7 @@ class AuthenticationActivity : BaseActivity() {
         }
 
         binding.btnBackToLogin.onOneClick {
+            isBackNavigation = true
             pageState.postValue(AuthState.LOGIN)
         }
 
@@ -301,7 +315,7 @@ class AuthenticationActivity : BaseActivity() {
 
     fun startCountDownTimer() {
         binding.tvResend.visibility = View.VISIBLE
-        binding.tvSendAgain.visibility = View.GONE
+        binding.tvSendAgain.visibility = View.INVISIBLE
         timer?.cancel()
         timer = object : CountDownTimer(59999, 1000) {
             override fun onTick(millisUntilFinished: Long) {
@@ -310,11 +324,37 @@ class AuthenticationActivity : BaseActivity() {
             }
 
             override fun onFinish() {
-                binding.tvResend.visibility = View.GONE
+                binding.tvResend.visibility = View.INVISIBLE
                 binding.tvSendAgain.visibility = View.VISIBLE
             }
         }
         timer?.start()
+    }
+
+    private fun animateInFromRight(newView: View, oldView: View) {
+        oldView.animate().translationX(-oldView.width.toFloat()).alpha(0f).setDuration(400)
+            .withEndAction {
+                oldView.visibility = View.INVISIBLE
+                oldView.translationX = 0f
+                oldView.alpha = 1f
+            }.start()
+        newView.translationX = newView.width.toFloat()
+        newView.alpha = 0f
+        newView.visibility = View.VISIBLE
+        newView.animate().translationX(0f).alpha(1f).setDuration(400).start()
+    }
+
+    private fun animateInFromLeft(newView: View, oldView: View) {
+        oldView.animate().translationX(oldView.width.toFloat()).alpha(0f).setDuration(400)
+            .withEndAction {
+                oldView.visibility = View.INVISIBLE
+                oldView.translationX = 0f
+                oldView.alpha = 1f
+            }.start()
+        newView.translationX = -newView.width.toFloat()
+        newView.alpha = 0f
+        newView.visibility = View.VISIBLE
+        newView.animate().translationX(0f).alpha(1f).setDuration(400).start()
     }
 
     override fun onDestroy() {

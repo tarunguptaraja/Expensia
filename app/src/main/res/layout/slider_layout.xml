@@ -1,38 +1,46 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
-    app:flow_horizontalAlign="center">
+    android:orientation="vertical">
 
-    <ImageView
-        android:id="@+id/titleImage"
+    <androidx.appcompat.widget.AppCompatImageView
+        android:id="@+id/title_image"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="10dp"
-        android:src="@drawable/onboarding_illust1" />
+        android:layout_height="0dp"
+        android:layout_margin="@dimen/_24sdp"
+        android:src="@drawable/email_sent_away"
+        app:layout_constraintDimensionRatio="H,1:1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/tv_title"
+        style="@style/TextView.Title1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="50dp"
-        android:fontFamily="@font/inter_bold"
+        android:layout_marginHorizontal="@dimen/_36sdp"
+        android:layout_marginTop="@dimen/_30sdp"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_22sdp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/title_image"
         tools:text="Gain total control of your money" />
 
     <TextView
         android:id="@+id/tv_description"
+        style="@style/TextView.Regular2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginHorizontal="30dp"
-        android:fontFamily="@font/inter_medium"
+        android:layout_marginHorizontal="@dimen/_40sdp"
+        android:layout_marginTop="@dimen/_12sdp"
         android:textAlignment="center"
-        android:textColor="@color/black"
-        android:textSize="@dimen/_12sdp"
+        android:textColor="@color/light_20"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tv_title"
         tools:text="Become your own money manager and make every cent count" />
-</LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
