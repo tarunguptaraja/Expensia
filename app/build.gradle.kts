@@ -21,7 +21,9 @@ android {
         release {
             isMinifyEnabled = true
             isShrinkResources = true
-            proguardFiles(getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro")
+            proguardFiles(
+                getDefaultProguardFile("proguard-android-optimize.txt"), "proguard-rules.pro"
+            )
         }
         debug {
             isMinifyEnabled = false
@@ -86,7 +88,7 @@ dependencies {
 
     implementation(libs.vita)
     implementation(libs.intuit.sdp.android)
-//    implementation (libs.pinview)
+    implementation(libs.pinview)
     implementation(libs.circleimageview)
     implementation(libs.lottie)
     implementation(libs.kodein.di.generic.jvm)

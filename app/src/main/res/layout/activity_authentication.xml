@@ -15,7 +15,7 @@
         android:id="@+id/cl_sign_up"
         android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:visibility="visible"
+        android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -26,7 +26,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_43sdp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -65,7 +65,7 @@
                 android:layout_marginTop="@dimen/_18sdp">
 
                 <EditText
-                    android:id="@+id/tv_sign_up_password"
+                    android:id="@+id/sign_up_password"
                     style="@style/TextView.Regular2"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
@@ -78,6 +78,7 @@
                     android:textColorHint="@color/light_20" />
 
                 <androidx.appcompat.widget.AppCompatImageView
+                    android:id="@+id/sign_up_password_eye"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_alignParentEnd="true"
@@ -99,6 +100,7 @@
             app:layout_constraintTop_toBottomOf="@+id/ll_sign_up_form">
 
             <com.google.android.material.checkbox.MaterialCheckBox
+                android:id="@+id/sign_up_check_box"
                 style="@style/TextView.Regular3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -190,21 +192,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_40sdp"
+            android:layout_marginTop="@dimen/_43sdp"
             android:orientation="vertical"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent">
 
             <EditText
-                android:id="@+id/log_in_name"
+                android:id="@+id/log_in_email"
                 style="@style/TextView.Regular2"
                 android:layout_width="match_parent"
                 android:layout_height="@dimen/_40sdp"
-                android:autofillHints="name"
+                android:autofillHints="emailAddress"
                 android:background="@drawable/light_stroke_12"
-                android:hint="@string/name"
-                android:inputType="textPersonName"
+                android:hint="@string/email"
+                android:inputType="textEmailAddress"
                 android:paddingHorizontal="@dimen/_12sdp"
                 android:textColor="@color/dark_100"
                 android:textColorHint="@color/light_20" />
@@ -306,7 +308,7 @@
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="@dimen/_12sdp"
             android:layout_marginTop="@dimen/_54sdp"
-            android:text="@string/don_t_worry_nenter_your_email_and_we_ll_send_you_a_link_to_reset_your_password"
+            android:text="@string/don_t_worry_enter_your_email_and_we_ll_send_you_a_link_to_reset_your_password"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
@@ -340,7 +342,6 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/forget_email" />
-
     </androidx.constraintlayout.widget.ConstraintLayout>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -376,6 +377,7 @@
             app:layout_constraintTop_toBottomOf="@+id/iv_email_sent_away" />
 
         <TextView
+            android:id="@+id/tv_email_sent_description"
             style="@style/TextView.Regular2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -393,7 +395,8 @@
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="@dimen/_12sdp"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_28sdp"
             android:text="@string/back_to_login"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
@@ -416,7 +419,7 @@
             android:layout_width="match_parent"
             android:layout_height="@dimen/_40sdp"
             android:layout_marginHorizontal="@dimen/_12sdp"
-            android:layout_marginTop="@dimen/_42sdp"
+            android:layout_marginTop="@dimen/_43sdp"
             android:autofillHints="password"
             android:background="@drawable/light_stroke_12"
             android:hint="@string/new_password"
@@ -447,6 +450,7 @@
             app:layout_constraintTop_toBottomOf="@+id/reset_new_password" />
 
         <Button
+            android:id="@+id/reset_continue"
             style="@style/Button"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -456,5 +460,92 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/reset_retype_password" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/cl_verify_otp"
+        android:layout_width="match_parent"
+        android:layout_height="0dp"
+        android:fitsSystemWindows="true"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/toolbar">
+
+        <TextView
+            style="@style/TextView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_40sdp"
+            android:text="@string/enter_your_verification_code"
+            app:layout_constraintBottom_toTopOf="@+id/otp_pin_view"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <com.chaos.view.PinView
+            android:id="@+id/otp_pin_view"
+            style="@style/TextView.Title1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_30sdp"
+            android:focusableInTouchMode="true"
+            android:inputType="number"
+            app:itemCount="6"
+            app:layout_constraintBottom_toTopOf="@+id/tv_resend"
+            app:layout_constraintStart_toStartOf="parent"
+            app:viewType="line"
+            tools:text="123" />
+
+        <TextView
+            android:id="@+id/tv_resend"
+            style="@style/TextView.Title3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            android:textColor="@color/violet_100"
+            app:layout_constraintBottom_toTopOf="@+id/tv_verification_mgs"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="04:59" />
+
+        <TextView
+            android:id="@+id/tv_verification_mgs"
+            style="@style/TextView.Regular2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_12sdp"
+            app:layout_constraintBottom_toTopOf="@+id/tv_send_again"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            tools:text="We send verification code to your email brajaoma*****@gmail.com. You can check your inbox." />
+
+        <TextView
+            android:id="@+id/tv_send_again"
+            style="@style/TextView.Regular2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_35sdp"
+            android:text="@string/i_did_not_received_the_code_send_again"
+            android:textColor="@color/violet_100"
+            app:layout_constraintBottom_toTopOf="@+id/btn_verify_otp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
+
+        <Button
+            android:id="@+id/btn_verify_otp"
+            style="@style/Button"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="@dimen/_12sdp"
+            android:layout_marginBottom="@dimen/_28sdp"
+            android:text="@string/verify"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

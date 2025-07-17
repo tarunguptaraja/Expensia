@@ -31,11 +31,9 @@ import kotlin.concurrent.thread
 val HttpUrl.endPoint: String
     get() {
         val apiUrl = toString().split("/")
-
-        var endPoint = ""
-        if (!apiUrl.get(apiUrl.size - 1).isNullOrEmpty()) endPoint =
-            apiUrl.get(apiUrl.size - 2) + "/" + apiUrl.get(apiUrl.size - 1)
-        else endPoint = apiUrl.get(apiUrl.size - 3) + "/" + apiUrl.get(apiUrl.size - 2)
+        var endPoint =
+            if (apiUrl[apiUrl.size - 1].isNotEmpty()) apiUrl[apiUrl.size - 2] + "/" + apiUrl[apiUrl.size - 1]
+            else apiUrl[apiUrl.size - 3] + "/" + apiUrl[apiUrl.size - 2]
         return endPoint.split("?")[0]
     }
 
