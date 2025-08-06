@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="@dimen/_36sdp"
+    android:layout_height="@dimen/_38sdp"
     android:layout_marginHorizontal="@dimen/_12sdp"
     android:gravity="center_vertical">
 
@@ -20,7 +20,7 @@
         android:layout_weight="1"
         android:textAlignment="center"
         android:textColor="@color/dark_50"
-        tools:text="Notification" />
+        tools:text="@string/notification" />
 
     <androidx.appcompat.widget.AppCompatImageView
         android:id="@+id/iv_more"
