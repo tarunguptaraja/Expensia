@@ -43,7 +43,7 @@ class OnboardingActivity : BaseActivity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        binding = ActivityOnboardingBinding.inflate(layoutInflater)
+        binding = ActivityOnboardingBinding.inflate(layoutInflater, null, false)
         setContentView(binding.root)
 
         val intent = Intent(this, AuthenticationActivity::class.java)

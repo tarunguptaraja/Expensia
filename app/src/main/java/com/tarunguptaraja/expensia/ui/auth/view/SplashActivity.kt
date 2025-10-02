@@ -12,6 +12,7 @@ import com.tarunguptaraja.expensia.databinding.ActivitySplashBinding
 import com.tarunguptaraja.expensia.extensions.putPermanentBoolean
 import com.tarunguptaraja.expensia.extensions.retrievePermanentBoolean
 import com.tarunguptaraja.expensia.extensions.retrieveString
+import com.tarunguptaraja.expensia.ui.home.view.HomeActivity
 import com.tarunguptaraja.expensia.utills.Constants
 
 class SplashActivity : BaseActivity() {
@@ -28,9 +29,9 @@ class SplashActivity : BaseActivity() {
         setContentView(binding.root)
         handler.postDelayed({
             overridePendingTransition(R.anim.slide_in_right, R.anim.slide_out_left)
-            if (/*alreadyLoggedIn ||*/ false) {
-                startActivity(Intent(this, MainActivity::class.java))
-            } else if (firstTimeUser || true) {
+            if (alreadyLoggedIn) {
+                startActivity(Intent(this, HomeActivity::class.java))
+            } else if (firstTimeUser) {
                 startActivity(Intent(this, OnboardingActivity::class.java))
                 putPermanentBoolean(Constants.FIRST_TIME_USER, false)
             } else {

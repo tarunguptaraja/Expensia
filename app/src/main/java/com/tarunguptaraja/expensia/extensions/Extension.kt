@@ -14,12 +14,21 @@ import androidx.fragment.app.Fragment
 import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import com.google.gson.JsonElement
+import com.google.gson.JsonIOException
 import com.google.gson.JsonParser
+import com.google.gson.JsonSyntaxException
+import com.google.gson.TypeAdapter
+import com.google.gson.internal.GsonBuildConfig
+import com.google.gson.reflect.TypeToken
+import com.google.gson.stream.JsonReader
 import com.tarunguptaraja.expensia.utills.OnOneClickListener
 import okhttp3.Interceptor
 import okhttp3.Response
 import org.json.JSONException
 import org.json.JSONObject
+import java.io.EOFException
+import java.io.IOException
+import java.lang.reflect.Type
 
 
 val gson = Gson()
@@ -45,6 +54,14 @@ fun Bundle.toJson(): JSONObject {
 
 fun String.toJsonTree(): JsonElement {
     return JsonParser.parseString(this)
+}
+
+inline fun <reified T : Any> JsonElement.to(): T {
+    return try {
+        gson.fromJson(this, object : TypeToken<T>() {}.type)
+    } catch (ex: Exception) {
+        throw ex
+    }
 }
 
 fun json(vararg entries: Pair<String, Any>): JSONObject {

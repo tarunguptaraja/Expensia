@@ -14,6 +14,7 @@ import com.tarunguptaraja.expensia.databinding.ActivityAuthenticationBinding
 import com.tarunguptaraja.expensia.extensions.buildColoredText
 import com.tarunguptaraja.expensia.extensions.hideKeyboard
 import com.tarunguptaraja.expensia.extensions.onOneClick
+import com.tarunguptaraja.expensia.extensions.putModel
 import com.tarunguptaraja.expensia.extensions.putString
 import com.tarunguptaraja.expensia.setupvm.store
 import com.tarunguptaraja.expensia.ui.auth.viewmodel.LogInViewModel
@@ -241,6 +242,9 @@ class AuthenticationActivity : BaseActivity() {
                     if (response.data.resetPassword) {
                         pageState.postValue(AuthState.RESET_PASSWORD)
                     } else {
+                        putString(Constants.JWT_TOKEN, response.data.token)
+                        putModel(Constants.USER_MODEL, response.data)
+                        putString(Constants.REFRESH_TOKEN, response.data.refreshToken)
                         startActivity(Intent(this, HomeActivity::class.java))
                         finish()
                     }

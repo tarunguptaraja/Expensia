@@ -45,4 +45,6 @@
     <color name="blue_60">#57A5FF</color>
     <color name="blue_40">#8AC0FF</color>
     <color name="blue_20">#BDDCFF</color>
+
+    <color name="inactive_tab">#C6C6C6</color>
 </resources>
